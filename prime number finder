@@ -1,0 +1,19 @@
+n <- 2000000 					# Max Number
+
+max_test <- ceiling(sqrt(n)) 	# Factor of n sqrt to test up to
+
+possible_prime <- rep(TRUE,n)	#Store possible true prime numbers
+
+possible_prime[seq(2+2,n,2)] <- FALSE 	# Sets all even numbers except 2 to false
+
+for (i in seq(3,max_test,2)) {
+	if(possible_prime[i]) possible_prime[seq(i+i,n,i)] <- FALSE
+	}							# Identify non-prime odd numbers starting after 3
+	
+L2M <- sum(possible_prime)		# count of identified prime numbers
+
+p2M <- which(possible_prime) 	# identified prime numbers
+
+pTM <- system.time(for (i in seq(3,max_test,2)) {
+	if(possible_prime[i]) possible_prime[seq(i+i,n,i)] <- FALSE
+	})
